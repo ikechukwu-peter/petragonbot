@@ -69,9 +69,35 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
-    response = {
-      text: `You sent the message: "${received_message.text}". Now send me an attachment!`,
-    };
+    if (
+      received_message.text.includes("hello") ||
+      received_message.text.includes("hi") ||
+      received_message.text.includes(`what's up?`)
+    ) {
+      response = {
+        text: "Hi! How are you doing today?",
+      };
+    } else if (
+      received_message.text.includes("fine") ||
+      received_message.text.includes("I am doing great") ||
+      received_message.text.includes("good ,great, not bad")
+    ) {
+      response = {
+        text: `That's awesome.`,
+      };
+    } else if (
+      received_message.text.includes("I want to build an app") ||
+      received_message.text.includes("I want to build a software") ||
+      received_message.text.includes("I need your services")
+    ) {
+      response = {
+        text: `Great! Tell me what you want to build and I will reply you shortly.`,
+      };
+    } else {
+      response = {
+        text: `I do not understand you yet. Try saying something else.`,
+      };
+    }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
@@ -116,7 +142,7 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
   if (payload === "yes") {
-    response = { text: "Thanks!" };
+    response = { text: "Thanks! I will look it up and get back to you" };
   } else if (payload === "no") {
     response = { text: "Oops, try sending another image." };
   }
