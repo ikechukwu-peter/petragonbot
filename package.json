@@ -4,7 +4,7 @@
   "description": "a facebook page chatbot",
   "main": "src/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
   "author": "Ikechukwu Peter",
   "license": "MIT",
